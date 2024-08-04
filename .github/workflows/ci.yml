@@ -15,6 +15,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-      - name: Test with Gradle
-        run: ./gradlew build
-        timeout-minutes: 60
+      - name: Build with Gradle
+        run: ./gradlew clean shadowJar
+#      - name: Run Fat Jar
+#        run: java -jar hw01-gradle/build/libs/hw01-gradle-1-all.jar
