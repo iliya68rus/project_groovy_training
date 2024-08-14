@@ -17,6 +17,6 @@ class AtmTest {
     @Test
     void acceptBanknotesSuccessfully() {
         assertEquals("GOOD", atm.acceptBanknotes())
-        assertEquals(1, storage.FIVE_THOUSAND_BILLS)
+        assertEquals(1, storage.fiveThousandBills)
     }
 }

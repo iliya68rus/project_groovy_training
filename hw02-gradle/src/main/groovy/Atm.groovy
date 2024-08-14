@@ -6,7 +6,7 @@ class Atm {
     }
 
     def acceptBanknotes() {
-        storage.FIVE_THOUSAND_BILLS++
+        storage.fiveThousandBills++
         "GOOD"
     }
 }

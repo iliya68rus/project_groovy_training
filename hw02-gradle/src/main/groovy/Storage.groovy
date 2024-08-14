@@ -1,3 +1,3 @@
 class Storage {
-    public int FIVE_THOUSAND_BILLS = 0;
+    public int fiveThousandBills = 0
 }
