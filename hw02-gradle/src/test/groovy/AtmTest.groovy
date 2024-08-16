@@ -23,6 +23,6 @@ class AtmTest {
     void getTotalSuccessfully() {
         atm.addBills(2, 1, 1)
 
-        assertEquals(12_100, atm.getTotal())
+        assertEquals(12_101, atm.getTotal())
     }
 }
