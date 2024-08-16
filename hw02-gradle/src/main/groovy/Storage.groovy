@@ -1,3 +1,7 @@
+import bill.FiveThousandBill
+import bill.OneHundredBill
+
 class Storage {
-    public int fiveThousandBills = 0
+    public FiveThousandBill fiveThousandBills = new FiveThousandBill()
+    public OneHundredBill oneHundredBills = new OneHundredBill()
 }

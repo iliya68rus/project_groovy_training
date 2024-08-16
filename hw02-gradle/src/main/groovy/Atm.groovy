@@ -5,8 +5,15 @@ class Atm {
         this.storage = storage
     }
 
-    def acceptBanknotes() {
-        storage.fiveThousandBills++
-        "GOOD"
+    void addBills(
+            int fiveThousandBills,
+            int oneHundredBills
+    ) {
+        storage.fiveThousandBills+= fiveThousandBills
+        storage.oneHundredBills+= oneHundredBills
+    }
+
+    int getTotal() {
+        storage.fiveThousandBills + storage.oneHundredBills
     }
 }
