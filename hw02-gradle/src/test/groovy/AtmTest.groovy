@@ -14,15 +14,15 @@ class AtmTest {
 
     @Test
     void addFiveThousandBillsSuccessfully() {
-        atm.addBills(15, 0)
+        atm.addBills(15, 0, 0)
 
         assertEquals(15, storage.fiveThousandBills.getAmount())
     }
 
     @Test
     void getTotalSuccessfully() {
-        atm.addBills(2, 7)
+        atm.addBills(2, 1, 1)
 
-        assertEquals(10_700, atm.getTotal())
+        assertEquals(12_100, atm.getTotal())
     }
 }

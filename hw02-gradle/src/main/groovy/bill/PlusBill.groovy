@@ -19,4 +19,8 @@ trait PlusBill {
     int getMultiplier() {
         return 0
     }
+
+    int getTotal() {
+        getAmount() * getMultiplier()
+    }
 }

@@ -7,13 +7,17 @@ class Atm {
 
     void addBills(
             int fiveThousandBills,
+            int twoThousandBill,
             int oneHundredBills
     ) {
         storage.fiveThousandBills+= fiveThousandBills
+        storage.twoThousandBill+= twoThousandBill
         storage.oneHundredBills+= oneHundredBills
     }
 
     int getTotal() {
-        storage.fiveThousandBills + storage.oneHundredBills
+        storage.oneHundredBills.getTotal() +
+                storage.twoThousandBill.getTotal() +
+                storage.fiveThousandBills.getTotal()
     }
 }
