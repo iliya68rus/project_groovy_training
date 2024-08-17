@@ -6,13 +6,13 @@ interface Atm {
 
     /**
      * Добавить купюры
-     * @param fiveThousandBill 5000
-     * @param twoThousandBill 2000
-     * @param oneThousandBill 1000
-     * @param fiveHundredBill 500
-     * @param twoHundredBill 200
-     * @param oneHundredBill 100
-     * @param fiftyBill 50
+     * @param fiveThousandBill 5000 номанил
+     * @param twoThousandBill 2000 номанил
+     * @param oneThousandBill 1000 номанил
+     * @param fiveHundredBill 500 номанил
+     * @param twoHundredBill 200 номанил
+     * @param oneHundredBill 100 номанил
+     * @param fiftyBill 50 номанил
      */
     void addBills(
             int fiveThousandBill,
