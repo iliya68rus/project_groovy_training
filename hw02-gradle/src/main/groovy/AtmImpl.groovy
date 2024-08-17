@@ -1,7 +1,11 @@
-class Atm {
+import api.Atm
+
+import javax.management.OperationsException
+
+class AtmImpl implements Atm {
     private final Storage storage
 
-    Atm(Storage storage) {
+    AtmImpl(Storage storage) {
         this.storage = storage
     }
 
@@ -14,6 +18,16 @@ class Atm {
             int oneHundredBills,
             int fiftyBill
     ) {
+        if (fiveThousandBills < 0 ||
+                twoThousandBill < 0 ||
+                oneThousandBill < 0 ||
+                fiveHundredBill < 0 ||
+                twoHundredBill < 0 ||
+                oneHundredBills < 0 ||
+                fiftyBill < 0) {
+            throw new OperationsException("Недопустимая операция")
+        }
+
         storage.fiveThousandBill+= fiveThousandBills
         storage.twoThousandBill+= twoThousandBill
         storage.oneThousandBill+= oneThousandBill

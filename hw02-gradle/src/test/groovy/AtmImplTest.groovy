@@ -1,14 +1,17 @@
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.InjectMocks
 import org.mockito.Spy
 import org.mockito.junit.jupiter.MockitoSettings
 
+import javax.management.OperationsException
+
 import static org.junit.jupiter.api.Assertions.assertEquals
 
 @MockitoSettings
-class AtmTest {
+class AtmImplTest {
     @InjectMocks
-    private Atm atm
+    private AtmImpl atm
     @Spy
     private Storage storage
 
@@ -59,6 +62,13 @@ class AtmTest {
         atm.addBills(0, 0, 0, 0, 0, 0, 2)
 
         assertEquals(100, atm.getTotal())
+    }
+
+    @Test
+    void addBillThrowException() {
+        Assertions.assertThrows(OperationsException.class,
+                () -> atm.addBills(-1, 0, 0, 0, 0, 0, 0)
+        )
     }
 
     @Test
