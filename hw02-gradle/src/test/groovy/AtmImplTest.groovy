@@ -6,7 +6,9 @@ import org.mockito.junit.jupiter.MockitoSettings
 
 import javax.management.OperationsException
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals
+import static org.junit.jupiter.api.Assertions.assertThrows
 
 @MockitoSettings
 class AtmImplTest {
@@ -66,7 +68,7 @@ class AtmImplTest {
 
     @Test
     void addBillThrowException() {
-        Assertions.assertThrows(OperationsException.class,
+        assertThrows(OperationsException.class,
                 () -> atm.addBills(-1, 0, 0, 0, 0, 0, 0)
         )
     }
@@ -76,5 +78,117 @@ class AtmImplTest {
         atm.addBills(2, 1, 1, 3, 2, 5, 1)
 
         assertEquals(15_450, atm.getTotal())
+    }
+
+    @Test
+    void issueAmount1150Successfully() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        def stack = atm.issueAmount(1150)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack.fiveThousandBill),
+                () -> assertEquals(0, stack.twoThousandBill),
+                () -> assertEquals(1, stack.oneThousandBill),
+                () -> assertEquals(0, stack.fiveHundredBill),
+                () -> assertEquals(0, stack.twoHundredBill),
+                () -> assertEquals(1, stack.oneHundredBill),
+                () -> assertEquals(1, stack.fiftyBill)
+        )
+    }
+
+    @Test
+    void issueAmount5500Successfully() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        def stack = atm.issueAmount(5500)
+
+        Assertions.assertAll(
+                () -> assertEquals(1, stack.fiveThousandBill),
+                () -> assertEquals(0, stack.twoThousandBill),
+                () -> assertEquals(0, stack.oneThousandBill),
+                () -> assertEquals(1, stack.fiveHundredBill),
+                () -> assertEquals(0, stack.twoHundredBill),
+                () -> assertEquals(0, stack.oneHundredBill),
+                () -> assertEquals(0, stack.fiftyBill)
+        )
+    }
+
+    @Test
+    void issueAmount2750Successfully() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        def stack = atm.issueAmount(2750)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack.fiveThousandBill),
+                () -> assertEquals(1, stack.twoThousandBill),
+                () -> assertEquals(0, stack.oneThousandBill),
+                () -> assertEquals(1, stack.fiveHundredBill),
+                () -> assertEquals(1, stack.twoHundredBill),
+                () -> assertEquals(0, stack.oneHundredBill),
+                () -> assertEquals(1, stack.fiftyBill)
+        )
+    }
+
+    @Test
+    void issueAmount950Successfully() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        def stack = atm.issueAmount(950)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack.fiveThousandBill),
+                () -> assertEquals(0, stack.twoThousandBill),
+                () -> assertEquals(0, stack.oneThousandBill),
+                () -> assertEquals(1, stack.fiveHundredBill),
+                () -> assertEquals(2, stack.twoHundredBill),
+                () -> assertEquals(0, stack.oneHundredBill),
+                () -> assertEquals(1, stack.fiftyBill)
+        )
+    }
+
+    @Test
+    void issueAmount5550OnlyFiftySuccessfully() {
+        atm.addBills(0, 0, 0, 0, 0, 0, 50_000)
+
+        def stack = atm.issueAmount(5_550)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack.fiveThousandBill),
+                () -> assertEquals(0, stack.twoThousandBill),
+                () -> assertEquals(0, stack.oneThousandBill),
+                () -> assertEquals(0, stack.fiveHundredBill),
+                () -> assertEquals(0, stack.twoHundredBill),
+                () -> assertEquals(0, stack.oneHundredBill),
+                () -> assertEquals(111, stack.fiftyBill)
+        )
+    }
+
+    @Test
+    void issueAmountNotEnoughSuccessfully() {
+        atm.addBills(1, 1, 1, 1, 1, 1, 1)
+
+        assertThrows(OperationsException.class,
+                () -> atm.issueAmount(10_000)
+        )
+    }
+
+    @Test
+    void negativeIssueAmountThrowException() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        assertThrows(OperationsException.class,
+                () -> atm.issueAmount(-1)
+        )
+    }
+
+    @Test
+    void incorrectIssueAmountThrowException() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        assertThrows(OperationsException.class,
+                () -> atm.issueAmount(1111)
+        )
     }
 }

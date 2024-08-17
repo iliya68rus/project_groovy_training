@@ -1,4 +1,5 @@
 import api.Atm
+import bill.PlusBill
 import bill.StackBills
 
 import javax.management.OperationsException
@@ -52,6 +53,54 @@ class AtmImpl implements Atm {
 
     @Override
     StackBills issueAmount(int amount) {
-        return null
+        if (amount <= 0 || amount % 50 != 0) {
+            throw new OperationsException("Недопустимая операция")
+        }
+        def stack = new StackBills()
+
+        def leftAmount = issueBill(storage.fiveThousandBill, amount)
+        stack.fiveThousandBill = (int) ((amount - leftAmount) / storage.fiveThousandBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.twoThousandBill, amount)
+        stack.twoThousandBill = (int) ((amount - leftAmount) / storage.twoThousandBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.oneThousandBill, amount)
+        stack.oneThousandBill = (int) ((amount - leftAmount) / storage.oneThousandBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.fiveHundredBill, amount)
+        stack.fiveHundredBill = (int) ((amount - leftAmount) / storage.fiveHundredBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.twoHundredBill, amount)
+        stack.twoHundredBill = (int) ((amount - leftAmount) / storage.twoHundredBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.oneHundredBill, amount)
+        stack.oneHundredBill = (int) ((amount - leftAmount) / storage.oneHundredBill.getMultiplier())
+        amount = leftAmount
+
+        leftAmount = issueBill(storage.fiftyBill, amount)
+        stack.fiftyBill = (int) ((amount - leftAmount) / storage.fiftyBill.getMultiplier())
+        amount = leftAmount
+
+        if (amount != 0) {
+            throw new OperationsException("Недостаточно купюр")
+        }
+        return stack
+    }
+
+    private def issueBill(PlusBill bill, int amount) {
+        def multiplier = bill.getMultiplier()
+        def possibleBill = (int) (amount / bill.getMultiplier())
+        if (possibleBill <= bill.getAmount()) {
+            def possibleAmount = multiplier * possibleBill
+            amount = amount - possibleAmount
+            def leftBill = bill.getAmount() - possibleBill
+            bill.setAmount(leftBill)
+        }
+        amount
     }
 }
