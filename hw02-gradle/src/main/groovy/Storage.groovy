@@ -1,9 +1,11 @@
-import bill.FiveThousandBill
-import bill.OneHundredBill
-import bill.TwoThousandBill
+import bill.*
 
 class Storage {
-    public FiveThousandBill fiveThousandBills = new FiveThousandBill()
+    public FiveThousandBill fiveThousandBill = new FiveThousandBill()
     public TwoThousandBill twoThousandBill = new TwoThousandBill()
-    public OneHundredBill oneHundredBills = new OneHundredBill()
+    public OneThousandBill oneThousandBill = new OneThousandBill()
+    public FiveHundredBill fiveHundredBill = new FiveHundredBill()
+    public TwoHundredBill twoHundredBill = new TwoHundredBill()
+    public OneHundredBill oneHundredBill = new OneHundredBill()
+    public FiftyBill fiftyBill = new FiftyBill()
 }

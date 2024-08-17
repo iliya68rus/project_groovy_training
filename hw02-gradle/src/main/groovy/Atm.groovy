@@ -8,16 +8,28 @@ class Atm {
     void addBills(
             int fiveThousandBills,
             int twoThousandBill,
-            int oneHundredBills
+            int oneThousandBill,
+            int fiveHundredBill,
+            int twoHundredBill,
+            int oneHundredBills,
+            int fiftyBill
     ) {
-        storage.fiveThousandBills+= fiveThousandBills
+        storage.fiveThousandBill+= fiveThousandBills
         storage.twoThousandBill+= twoThousandBill
-        storage.oneHundredBills+= oneHundredBills
+        storage.oneThousandBill+= oneThousandBill
+        storage.fiveHundredBill+= fiveHundredBill
+        storage.twoHundredBill+= twoHundredBill
+        storage.oneHundredBill+= oneHundredBills
+        storage.fiftyBill+= fiftyBill
     }
 
     int getTotal() {
-        storage.oneHundredBills.getTotal() +
+        storage.fiveThousandBill.getTotal() +
                 storage.twoThousandBill.getTotal() +
-                storage.fiveThousandBills.getTotal()
+                storage.oneThousandBill.getTotal() +
+                storage.fiveHundredBill.getTotal() +
+                storage.twoHundredBill.getTotal() +
+                storage.oneHundredBill.getTotal() +
+                storage.fiftyBill.getTotal()
     }
 }

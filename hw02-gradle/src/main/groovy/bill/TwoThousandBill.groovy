@@ -1,7 +1,7 @@
 package bill
 
 class TwoThousandBill implements PlusBill {
-    private final int multiplier = 2000
+    private final int multiplier = 2_000
     private int amount
 
     @Override
