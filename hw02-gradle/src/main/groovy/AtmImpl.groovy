@@ -95,12 +95,16 @@ class AtmImpl implements Atm {
     private def issueBill(PlusBill bill, int amount) {
         def multiplier = bill.getMultiplier()
         def possibleBill = (int) (amount / bill.getMultiplier())
-        if (possibleBill <= bill.getAmount()) {
-            def possibleAmount = multiplier * possibleBill
-            amount = amount - possibleAmount
-            def leftBill = bill.getAmount() - possibleBill
-            bill.setAmount(leftBill)
+        if (possibleBill == 0) {
+            amount
         }
+        if (possibleBill > bill.getAmount()) {
+            possibleBill = bill.getAmount()
+        }
+        def possibleAmount = multiplier * possibleBill
+        amount = amount - possibleAmount
+        def leftBill = bill.getAmount() - possibleBill
+        bill.setAmount(leftBill)
         amount
     }
 }

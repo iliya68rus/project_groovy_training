@@ -191,4 +191,66 @@ class AtmImplTest {
                 () -> atm.issueAmount(1111)
         )
     }
+
+    @Test
+    void severalIssueAmountSuccessfully() {
+        atm.addBills(10, 10, 10, 10, 10, 10, 10)
+
+        def stack1 = atm.issueAmount(250)
+        def stack2 = atm.issueAmount(10_050)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack1.fiveThousandBill),
+                () -> assertEquals(0, stack1.twoThousandBill),
+                () -> assertEquals(0, stack1.oneThousandBill),
+                () -> assertEquals(0, stack1.fiveHundredBill),
+                () -> assertEquals(1, stack1.twoHundredBill),
+                () -> assertEquals(0, stack1.oneHundredBill),
+                () -> assertEquals(1, stack1.fiftyBill),
+                () -> assertEquals(2, stack2.fiveThousandBill),
+                () -> assertEquals(0, stack2.twoThousandBill),
+                () -> assertEquals(0, stack2.oneThousandBill),
+                () -> assertEquals(0, stack2.fiveHundredBill),
+                () -> assertEquals(0, stack2.twoHundredBill),
+                () -> assertEquals(0, stack2.oneHundredBill),
+                () -> assertEquals(1, stack2.fiftyBill)
+        )
+    }
+
+    @Test
+    void severalIssueAmountFirstSuccessfullyAndSecondThrowException() {
+        atm.addBills(1, 1, 1, 1, 1, 1, 1)
+
+        def stack1 = atm.issueAmount(600)
+
+        Assertions.assertAll(
+                () -> assertEquals(0, stack1.fiveThousandBill),
+                () -> assertEquals(0, stack1.twoThousandBill),
+                () -> assertEquals(0, stack1.oneThousandBill),
+                () -> assertEquals(1, stack1.fiveHundredBill),
+                () -> assertEquals(0, stack1.twoHundredBill),
+                () -> assertEquals(1, stack1.oneHundredBill),
+                () -> assertEquals(0, stack1.fiftyBill),
+                () -> assertThrows(OperationsException.class,
+                        () -> atm.issueAmount(10_050)
+                )
+        )
+    }
+
+    @Test
+    void issueAmount10000OnlyFiveThousandAndFiftySuccessfully() {
+        atm.addBills(1, 0, 0, 0, 0, 0, 100)
+
+        def stack1 = atm.issueAmount(10_000)
+
+        Assertions.assertAll(
+                () -> assertEquals(1, stack1.fiveThousandBill),
+                () -> assertEquals(0, stack1.twoThousandBill),
+                () -> assertEquals(0, stack1.oneThousandBill),
+                () -> assertEquals(0, stack1.fiveHundredBill),
+                () -> assertEquals(0, stack1.twoHundredBill),
+                () -> assertEquals(0, stack1.oneHundredBill),
+                () -> assertEquals(100, stack1.fiftyBill)
+        )
+    }
 }
