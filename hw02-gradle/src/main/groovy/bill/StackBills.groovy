@@ -1,0 +1,4 @@
+package bill
+
+class StackBills {
+}

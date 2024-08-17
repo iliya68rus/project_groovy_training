@@ -1,6 +1,9 @@
 package api
 
+import bill.StackBills
+
 interface Atm {
+
     /**
      * Добавить купюры
      * @param fiveThousandBills 5000
@@ -26,4 +29,11 @@ interface Atm {
      * @return остаток
      */
     int getTotal()
+
+    /**
+     * Выдача денежных средств
+     * @param amount количество запрощенных денежных средств
+     * @return набор кюпюр
+     */
+    StackBills issueAmount(int amount)
 }
