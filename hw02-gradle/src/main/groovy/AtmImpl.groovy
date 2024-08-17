@@ -1,4 +1,5 @@
 import api.Atm
+import bill.StackBills
 
 import javax.management.OperationsException
 
@@ -9,34 +10,36 @@ class AtmImpl implements Atm {
         this.storage = storage
     }
 
+    @Override
     void addBills(
-            int fiveThousandBills,
+            int fiveThousandBill,
             int twoThousandBill,
             int oneThousandBill,
             int fiveHundredBill,
             int twoHundredBill,
-            int oneHundredBills,
+            int oneHundredBill,
             int fiftyBill
     ) {
-        if (fiveThousandBills < 0 ||
+        if (fiveThousandBill < 0 ||
                 twoThousandBill < 0 ||
                 oneThousandBill < 0 ||
                 fiveHundredBill < 0 ||
                 twoHundredBill < 0 ||
-                oneHundredBills < 0 ||
+                oneHundredBill < 0 ||
                 fiftyBill < 0) {
             throw new OperationsException("Недопустимая операция")
         }
 
-        storage.fiveThousandBill+= fiveThousandBills
+        storage.fiveThousandBill+= fiveThousandBill
         storage.twoThousandBill+= twoThousandBill
         storage.oneThousandBill+= oneThousandBill
         storage.fiveHundredBill+= fiveHundredBill
         storage.twoHundredBill+= twoHundredBill
-        storage.oneHundredBill+= oneHundredBills
+        storage.oneHundredBill+= oneHundredBill
         storage.fiftyBill+= fiftyBill
     }
 
+    @Override
     int getTotal() {
         storage.fiveThousandBill.getTotal() +
                 storage.twoThousandBill.getTotal() +
@@ -45,5 +48,10 @@ class AtmImpl implements Atm {
                 storage.twoHundredBill.getTotal() +
                 storage.oneHundredBill.getTotal() +
                 storage.fiftyBill.getTotal()
+    }
+
+    @Override
+    StackBills issueAmount(int amount) {
+        return null
     }
 }
