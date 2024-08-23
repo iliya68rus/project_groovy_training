@@ -17,5 +17,5 @@ jobs:
           distribution: 'temurin'
       - name: Build with Gradle
         run: ./gradlew clean shadowJar
-#      - name: Run Fat Jar
-#        run: java -jar hw01-gradle/build/libs/hw01-gradle-1-all.jar
+      - name: Run Tests
+        run: ./gradlew test
