@@ -14,4 +14,16 @@ class Task {
                 .map(text -> new Action(start, text))
                 .toList()
     }
+
+    LocalDateTime getStart() {
+        return start
+    }
+
+    LocalDateTime getEnd() {
+        return end
+    }
+
+    List<Action> getActionList() {
+        return actionList
+    }
 }
