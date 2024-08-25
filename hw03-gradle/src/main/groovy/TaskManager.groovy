@@ -21,7 +21,7 @@ class TaskManager {
     }
 
     List<Task> getTaskListByDay(LocalDate date) {
-        return taskList
+        return taskList.groupBy { it.start.toLocalDate() }.get(date, Collections.emptyList())
     }
 
     static boolean between(LocalDateTime start, LocalDateTime end, LocalDateTime current) {

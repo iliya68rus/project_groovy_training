@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.InjectMocks
 import org.mockito.junit.jupiter.MockitoSettings
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @MockitoSettings
@@ -16,7 +15,7 @@ class TaskManagerTest {
     void addTaskSuccessfully() {
         taskManager.addTask(base, base.plusHours(3), "Action1", "Action2", "Action3")
 
-        Assertions.assertEquals(1, taskManager.getTaskListByDay(LocalDate.now()).size())
+        Assertions.assertEquals(1, taskManager.getTaskListByDay(base.toLocalDate()).size())
     }
 
     @Test
@@ -37,5 +36,13 @@ class TaskManagerTest {
         taskManager.addTask(base, base.plusHours(3), "Action1")
 
         Assertions.assertThrows(RuntimeException.class, () -> taskManager.addTask(base.plusHours(2), base.plusHours(7), "Action2"))
+    }
+
+    @Test
+    void addSeveralTaskDifferentDatesSuccessfully() {
+        taskManager.addTask(base, base.plusHours(3), "Action1", "Action2", "Action3")
+        taskManager.addTask(base.plusDays(1), base.plusDays(1).plusHours(3), "Action1", "Action2", "Action3")
+
+        Assertions.assertEquals(1, taskManager.getTaskListByDay(base.toLocalDate()).size())
     }
 }
