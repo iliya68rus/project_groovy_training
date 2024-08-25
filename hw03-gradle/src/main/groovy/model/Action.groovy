@@ -10,4 +10,8 @@ class Action {
         this.dateTime = dateTime
         this.text = text
     }
+
+    String getText() {
+        return text
+    }
 }

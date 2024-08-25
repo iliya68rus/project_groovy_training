@@ -26,4 +26,8 @@ class Task {
     List<Action> getActionList() {
         return actionList
     }
+
+    void setActionList(List<Action> actionList) {
+        this.actionList = actionList
+    }
 }
