@@ -1,7 +1,7 @@
 import static XlsxBuilder.*
 
 xlsxBuilder("test") {
-    sheet(1) {
+    sheet(3) {
         row(2) {
             cell {
                 value = 5
