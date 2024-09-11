@@ -1,5 +1,15 @@
-//new XlsxBuilder("123")
+import static XlsxBuilder.*
 
-//new XlsxBuilder("123") {
-//    println "builder"
-//}
+xlsxBuilder("test") {
+    sheet(1) {
+        row(2) {
+            cell {
+                value = 5
+            }
+
+            cell {
+                value = 3
+            }
+        }
+    }
+}
