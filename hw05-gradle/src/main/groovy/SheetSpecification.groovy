@@ -1,10 +1,10 @@
 class SheetSpecification {
-    int number
+    String name
     List<RowSpecification> rows = []
 
-    RowSpecification sheet(int number, @DelegatesTo(RowSpecification) Closure closure) {
-        this.number = number
+    RowSpecification row(int number, @DelegatesTo(RowSpecification) Closure closure) {
         def specification = new RowSpecification()
+        specification.number = number
         rows += specification
         closure.delegate = specification
         closure.resolveStrategy = Closure.DELEGATE_ONLY
