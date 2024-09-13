@@ -10,7 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.groovy:groovy:4.0.14'
+    implementation 'org.codehaus.groovy:groovy-xml:3.0.22'
+    implementation 'org.codehaus.groovy:groovy-json:3.0.22'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
