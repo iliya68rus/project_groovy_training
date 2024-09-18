@@ -10,4 +10,6 @@ class ConfigStore {
 
     Integer httpsPort
     Boolean httpsSecurity
+
+    Map<String, Boolean> mapping = [:]
 }

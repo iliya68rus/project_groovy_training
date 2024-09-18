@@ -13,6 +13,9 @@ class ConfigBuilderTest {
         Assertions.assertEquals(false, store.httpSecurity)
         Assertions.assertEquals(4443, store.httpsPort)
         Assertions.assertEquals(true, store.httpsSecurity)
+
+        Assertions.assertEquals(true, store.mapping.get("/"))
+        Assertions.assertEquals(false, store.mapping.get("/login"))
     }
 
 
@@ -26,6 +29,9 @@ class ConfigBuilderTest {
         Assertions.assertEquals(false, store.httpSecurity)
         Assertions.assertEquals(4443, store.httpsPort)
         Assertions.assertEquals(true, store.httpsSecurity)
+
+        Assertions.assertEquals(true, store.mapping.get("/"))
+        Assertions.assertEquals(false, store.mapping.get("/login"))
     }
 
     @Test
@@ -38,6 +44,9 @@ class ConfigBuilderTest {
         Assertions.assertEquals(false, store.httpSecurity)
         Assertions.assertEquals(4443, store.httpsPort)
         Assertions.assertEquals(true, store.httpsSecurity)
+
+        Assertions.assertEquals(true, store.mapping.get("/"))
+        Assertions.assertEquals(false, store.mapping.get("/login"))
     }
 
     @Test
@@ -50,5 +59,8 @@ class ConfigBuilderTest {
         Assertions.assertEquals(false, store.httpSecurity)
         Assertions.assertEquals(443, store.httpsPort)
         Assertions.assertEquals(true, store.httpsSecurity)
+
+        Assertions.assertEquals(true, store.mapping.get("/"))
+        Assertions.assertEquals(false, store.mapping.get("/login"))
     }
 }

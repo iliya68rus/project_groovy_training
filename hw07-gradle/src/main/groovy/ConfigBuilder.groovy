@@ -28,6 +28,8 @@ class ConfigBuilder {
         store.httpsPort = https.port
         store.httpsSecurity = https.secure
 
+        setMapping()
+
         store
     }
 
@@ -67,5 +69,15 @@ class ConfigBuilder {
     private static String getScript(String name) {
         def parentPath = this.getClassLoader().getResource(name).getFile()
         new File(parentPath).text
+    }
+
+    private static void setMapping() {
+        for (final def closure in mappings) {
+            def spec = new MappingSpec()
+            closure.delegate = spec
+            closure.resolveStrategy = Closure.DELEGATE_ONLY
+            closure()
+            store.mapping.put(spec.url, spec.active)
+        }
     }
 }
