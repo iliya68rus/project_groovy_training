@@ -5,9 +5,9 @@ pipeline {
         MODULES = getModules()
     }
 
-//     tools {
-//         maven "M3"
-//     }
+    tools {
+        gradle "GR"
+    }
 
     stages {
         stage('PrintSysTime') {
