@@ -4,7 +4,8 @@ pipeline {
     tools {
         gradle "GR"
 //         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'latest'
+//         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'latest'
+        DOCKER = "${dockerTool}/bin"
     }
 
     environment {
