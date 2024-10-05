@@ -5,6 +5,10 @@ pipeline {
         MODULES = getModules()
     }
 
+    tools {
+        maven "M3"
+    }
+
     stages {
         stage('PrintSysTime') {
             steps {
@@ -22,7 +26,7 @@ pipeline {
                     println "modules = ${env.MODULES}"
                     for (module in env.MODULES) {
                         dir(module) {
-                            sh "gradlew clean build"
+                            sh "mvn clean package"
                         }
                     }
                 }
