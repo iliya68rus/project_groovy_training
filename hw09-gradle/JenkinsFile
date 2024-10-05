@@ -20,6 +20,11 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
+                    for (module in env.MODULES) {
+                        dir(module) {
+                            sh "./gradlew clean build"
+                        }
+                    }
                 }
             }
         }
@@ -27,5 +32,5 @@ pipeline {
 }
 
 def getModules() {
-    ['hw01-gradle', 'hw02-gradle', 'hw03-gradle']
+    ['hw01-gradle', 'hw02-gradle', 'hw03-gradle', 'hw04-gradle', 'hw05-gradle']
 }
