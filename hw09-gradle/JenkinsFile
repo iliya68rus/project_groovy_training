@@ -5,9 +5,9 @@ pipeline {
         MODULES = getModules()
     }
 
-    tools {
-        maven "M3"
-    }
+//     tools {
+//         maven "M3"
+//     }
 
     stages {
         stage('PrintSysTime') {
@@ -30,7 +30,8 @@ pipeline {
 //                             sh "mvn --projects sample-client-connector,sample-rest install"
 //                         }
 //                     }
-                    sh "mvn --projects hw01-gradle,hw02-gradle clean package"
+//                     sh "mvn --projects hw01-gradle,hw02-gradle clean package"
+                    sh "gradlew clean build"
                 }
             }
         }
