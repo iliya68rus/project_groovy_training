@@ -5,7 +5,8 @@ pipeline {
         stage('PrintSysTime') {
             steps {
                 def branchName = env.BRANCH_NAME
-                echo "branch name: ${branchName}"
+//                 echo "branch name: ${branchName}"
+                echo 'Pulling...' + env.BRANCH_NAME
             }
         }
         stage('Hello') {
