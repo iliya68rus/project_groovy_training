@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        MODULES = getModules()
+    }
+
     stages {
         stage('PrintSysTime') {
             steps {
@@ -12,10 +16,16 @@ pipeline {
                 }
             }
         }
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World from git'
+                script {
+                    println "modules = ${env.MODULES}"
+                }
             }
         }
     }
+}
+
+def getModules() {
+    ['hw01-gradle', 'hw02-gradle', 'hw03-gradle']
 }
