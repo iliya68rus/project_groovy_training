@@ -24,25 +24,12 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
-//                     for (def module in env.MODULES) {
                     for (def module in env.MODULES.split(",")) {
-//                         if (module.contains('[') || module.contains(']')) {
-//                             continue
-//                         }
-// //                         dir(module) {
                         println "module name: ${module}"
                         sh "./gradlew ${module}:clean ${module}:build"
-// //                         }
                     }
-
-//                     sh "./gradlew hw01-gradle:clean hw01-gradle:build"
-//                     sh "./gradlew clean build"
                 }
             }
         }
     }
 }
-
-// def getModules() {
-//     ['hw01-gradle', 'hw02-gradle', 'hw03-gradle', 'hw04-gradle', 'hw05-gradle']
-// }
