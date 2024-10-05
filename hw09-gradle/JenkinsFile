@@ -43,5 +43,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Archive') {
+            steps {
+                script {
+                    println "modules = ${env.MODULES}"
+                    for (def module in env.MODULES.split(",")) {
+                        println "module name: ${module}"
+                        archiveArtifacts artifacts: "${module}/build/libs/*.jar", allowEmptyArchive: false
+                    }
+                }
+            }
+        }
     }
 }
