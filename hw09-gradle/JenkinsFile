@@ -24,8 +24,9 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
-                    for (module in env.MODULES) {
+                    for (def module in env.MODULES) {
 // //                         dir(module) {
+                        println module
                         sh "./gradlew ${module}:clean ${module}:build"
 // //                         }
                     }
