@@ -24,14 +24,13 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
-//                     for (module in env.MODULES) {
-//                         dir(module) {
-//                             sh "mvn clean package"
-//                             sh "mvn --projects sample-client-connector,sample-rest install"
-//                         }
-//                     }
-//                     sh "mvn --projects hw01-gradle,hw02-gradle clean package"
-                    sh "gradlew clean build"
+                    for (module in env.MODULES) {
+                        dir(module) {
+                            sh "./gradlew clean build"
+                        }
+                    }
+
+//                     sh "./gradlew clean build"
                 }
             }
         }
