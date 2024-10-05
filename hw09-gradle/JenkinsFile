@@ -6,7 +6,8 @@ pipeline {
             steps {
 //                 def branchName = env.BRANCH_NAME
 //                 echo "branch name: ${branchName}"
-                echo 'Pulling...' + env.BRANCH_NAME
+//                 echo 'Pulling...' + env.BRANCH_NAME
+                echo "Pulling2... ${branch}"
             }
         }
         stage('Hello') {

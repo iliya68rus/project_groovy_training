@@ -2,3 +2,4 @@ Git
 Maven Integration
 Pipeline
 Pipeline: Stage View
+Active Choices для добавления параметров сборки
