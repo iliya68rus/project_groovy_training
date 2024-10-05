@@ -22,7 +22,7 @@ pipeline {
                     println "modules = ${env.MODULES}"
                     for (module in env.MODULES) {
                         dir(module) {
-                            sh "./gradlew clean build"
+                            sh "gradlew clean build"
                         }
                     }
                 }
