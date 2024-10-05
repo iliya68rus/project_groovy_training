@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MODULES = getModules()
+        MODULES = "hw01-gradle,hw02-gradle,hw03-gradle,hw04-gradle,hw05-gradle"
     }
 
     tools {
@@ -24,10 +24,11 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
-                    for (def module in env.MODULES) {
-                        if (module.contains('[') || module.contains(']')) {
-                            continue
-                        }
+//                     for (def module in env.MODULES) {
+                    for (def module in env.MODULES.split(",")) {
+//                         if (module.contains('[') || module.contains(']')) {
+//                             continue
+//                         }
 // //                         dir(module) {
                         println "module name: ${module}"
                         sh "./gradlew ${module}:clean ${module}:build"
@@ -42,6 +43,6 @@ pipeline {
     }
 }
 
-def getModules() {
-    ['hw01-gradle', 'hw02-gradle', 'hw03-gradle', 'hw04-gradle', 'hw05-gradle']
-}
+// def getModules() {
+//     ['hw01-gradle', 'hw02-gradle', 'hw03-gradle', 'hw04-gradle', 'hw05-gradle']
+// }
