@@ -3,9 +3,6 @@ pipeline {
 
     tools {
         gradle "GR"
-//         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
-//         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'latest'
-//         DOCKER = "${dockerTool}/bin"
         dockerTool 'docker-19.03.11'
     }
 
