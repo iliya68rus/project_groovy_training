@@ -1,0 +1,4 @@
+Git
+Maven Integration
+Pipeline
+Pipeline: Stage View
