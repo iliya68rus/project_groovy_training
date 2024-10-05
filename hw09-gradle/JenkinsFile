@@ -1,13 +1,14 @@
 pipeline {
     agent any
 
+    tools {
+        gradle "GR"
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
+    }
+
     environment {
         MODULES = "hw01-gradle,hw02-gradle,hw03-gradle,hw04-gradle,hw05-gradle"
         DOCKER_REGISTRY = 'groovytest123'
-    }
-
-    tools {
-        gradle "GR"
     }
 
     stages {
@@ -24,7 +25,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    println "modules = ${env.MODULES}"
                     for (def module in env.MODULES.split(",")) {
                         println "module name: ${module}"
                         sh "./gradlew ${module}:clean ${module}:build"
@@ -36,7 +36,6 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    println "modules = ${env.MODULES}"
                     for (def module in env.MODULES.split(",")) {
                         println "module name: ${module}"
                         sh "./gradlew ${module}:test"
@@ -48,7 +47,6 @@ pipeline {
         stage('Archive') {
             steps {
                 script {
-                    println "modules = ${env.MODULES}"
                     for (def module in env.MODULES.split(",")) {
                         println "module name: ${module}"
                         archiveArtifacts artifacts: "${module}/build/libs/*.jar", allowEmptyArchive: false
@@ -60,8 +58,9 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    println "modules = ${env.MODULES}"
+                    sh "docker version"
                     for (def module in env.MODULES.split(",")) {
+                        println "module name: ${module}"
                         sh "docker build -t ${env.DOCKER_REGISTRY}/${module}:latest ."
                     }
                 }
