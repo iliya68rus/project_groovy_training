@@ -31,5 +31,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Test') {
+            steps {
+                script {
+                    println "modules = ${env.MODULES}"
+                    for (def module in env.MODULES.split(",")) {
+                        println "module name: ${module}"
+                        sh "./gradlew ${module}:test"
+                    }
+                }
+            }
+        }
     }
 }
