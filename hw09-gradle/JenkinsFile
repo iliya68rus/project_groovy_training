@@ -24,12 +24,13 @@ pipeline {
             steps {
                 script {
                     println "modules = ${env.MODULES}"
-                    for (module in env.MODULES) {
-//                         dir(module) {
-                        sh "./gradlew ${module}:clean build"
-//                         }
-                    }
+//                     for (module in env.MODULES) {
+// //                         dir(module) {
+//                         sh "./gradlew ${module}:clean build"
+// //                         }
+//                     }
 
+                    sh "./gradlew hw01-gradle:clean build"
 //                     sh "./gradlew clean build"
                 }
             }
