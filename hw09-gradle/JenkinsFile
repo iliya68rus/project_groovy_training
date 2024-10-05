@@ -2,6 +2,10 @@ pipeline {
     agent any
 
     stages {
+        stage() {
+            def branchName = env.BRANCH_NAME
+            echo "branch name: ${${branchName}}"
+        }
         stage('Hello') {
             steps {
                 echo 'Hello World from git'
