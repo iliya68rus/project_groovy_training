@@ -30,7 +30,7 @@ pipeline {
 // //                         }
 //                     }
 
-                    sh "./gradlew hw01-gradle:clean build"
+                    sh "./gradlew hw01-gradle:clean hw01-gradle:build"
 //                     sh "./gradlew clean build"
                 }
             }
