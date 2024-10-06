@@ -66,5 +66,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Login') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', ${docker_credentials}) {
+                        echo 'Logged into Docker Hub'
+                    }
+                }
+            }
+        }
+
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    for (def module in env.MODULES.split(",")) {
+                        sh "docker push ${env.DOCKER_REGISTRY}/${module}:latest"
+                    }
+                }
+            }
+        }
     }
 }
