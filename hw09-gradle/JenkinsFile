@@ -1,0 +1,58 @@
+node {
+    def gradleTool = tool name: 'GR', type: 'gradle'
+    def dockerTool = tool name: 'docker-19.03.11', type: 'dockerTool'
+
+    env.MODULES = "hw01-gradle,hw02-gradle,hw03-gradle,hw04-gradle,hw05-gradle"
+    env.DOCKER_REGISTRY = 'groovytest123'
+
+    def processModules(closure) {
+        env.MODULES.split(",").each { module ->
+            println "module name: ${module}"
+            closure(module)
+        }
+    }
+
+    stage('PrintSysTime') {
+        echo "branch name: ${env.BRANCH_NAME}"
+        def now = java.time.LocalDateTime.now()
+        def time = now.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"))
+        echo "time: ${time}"
+    }
+
+    stage('Build') {
+        processModules { module ->
+            sh "${gradleTool}/bin/gradlew ${module}:clean ${module}:build"
+        }
+    }
+
+    stage('Test') {
+        processModules { module ->
+            sh "${gradleTool}/bin/gradlew ${module}:test"
+        }
+    }
+
+    stage('Archive') {
+        processModules { module ->
+            archiveArtifacts artifacts: "${module}/build/libs/*.jar", allowEmptyArchive: false
+        }
+    }
+
+    stage('Build Docker Images') {
+        sh "${dockerTool}/docker version"
+        processModules { module ->
+            sh "${dockerTool}/docker build -t ${env.DOCKER_REGISTRY}/${module}:latest ."
+        }
+    }
+
+    stage('Docker Login') {
+        docker.withRegistry('https://index.docker.io/v1/', 'docker_credentials') {
+            echo 'Logged into Docker Hub'
+        }
+    }
+
+    stage('Push Docker Images') {
+        processModules { module ->
+            sh "${dockerTool}/docker push ${env.DOCKER_REGISTRY}/${module}:latest"
+        }
+    }
+}
