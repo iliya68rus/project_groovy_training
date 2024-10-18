@@ -1,0 +1,62 @@
+plugins {
+    id 'groovy'
+}
+apply plugin: MyPlugin
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.14'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+myPlugin {
+    fieldValue = 'Hello World'
+    className = 'GeneratedClass'
+    rootDir = 'src/main'
+    packageName = 'org.example.generated'
+}
+
+class MyPluginExtension {
+    String fieldValue
+    String className
+    String rootDir
+    String packageName
+}
+
+class MyPlugin implements Plugin<Project> {
+    @Override
+    void apply(Project project) {
+        def extension = project.extensions.create('myPlugin', MyPluginExtension)
+
+        project.task("generateCode") {
+            doLast {
+                def generatedDir = project.file("build/generated/sources/${extension.rootDir}")
+                generatedDir.mkdirs()
+
+                def generatedFile = new File(generatedDir, "${extension.className}.groovy")
+                generatedFile.text =
+"""package ${extension.packageName}
+
+class ${extension.className} {
+    String field = '${extension.fieldValue}'
+}
+"""
+
+                project.sourceSets.main.groovy.srcDir generatedDir
+            }
+        }
+
+        project.tasks.compileGroovy.dependsOn 'generateCode'
+    }
+}
