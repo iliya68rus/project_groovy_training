@@ -3,8 +3,14 @@ package todo.list
 
 class TaskController {
 
+    static responseFormats = ['json', 'xml']
+
     def index() {
         respond Task.list()
+    }
+
+    def show(Long id) {
+        respond Task.get(id) ?: respond(status: NOT_FOUND)
     }
 
     def create() {
