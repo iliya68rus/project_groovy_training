@@ -11,7 +11,7 @@ sql.execute('INSERT INTO cat (name, age) VALUES (\'Леший\', NULL)')
 def query = new QueryBuilder(sql, Cat)
 query.from(Cat).where {
     or {
-        "age".eq(4)
-        "age".nonEq(null)
+        eq("age", 4)
+        nonEq("age", null)
     }
 }.execute()

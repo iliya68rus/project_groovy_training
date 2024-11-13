@@ -23,11 +23,13 @@ class QueryBuilder {
     }
 
     def or(Closure closure) {
-        whereClause.add('(')
+        def orClause = []
         closure.delegate = this
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure()
-        whereClause.add(')')
+        if (orClause.size() > 0) {
+            whereClause.add('(' + orClause.join(' OR ') + ')')
+        }
         this
     }
 
@@ -53,7 +55,7 @@ class QueryBuilder {
     def execute() {
         def query = buildQuery()
         println "Выполненый запрос: ${query}"
-        sql.eachRow(query) { row ->
+        sql.eachRow(query.toString()) { row ->
             println row
         }
     }
