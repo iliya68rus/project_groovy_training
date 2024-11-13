@@ -10,7 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.groovy:groovy:4.0.14'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation 'org.apache.groovy:groovy-all:4.0.14'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
