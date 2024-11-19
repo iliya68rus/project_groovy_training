@@ -9,5 +9,6 @@ include 'hw06-gradle'
 include 'hw07-gradle'
 include 'hw08-gradle'
 include 'hw09-gradle'
+include 'hw10-gradle'
 include 'hw11-gradle'
 
