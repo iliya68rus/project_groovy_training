@@ -6,4 +6,7 @@ import grails.gorm.annotation.Entity
 class Todo {
     String title
     String desc
+    List<Task> tasks
+
+    static hasMany = [tasks: Task]
 }
