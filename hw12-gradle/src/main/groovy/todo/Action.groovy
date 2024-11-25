@@ -2,11 +2,11 @@ package todo
 
 import grails.gorm.annotation.Entity
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 class Action {
     String description
-    LocalDate startDate
-    LocalDate endDate
+    LocalDateTime startDate
+    LocalDateTime endDate
 }
