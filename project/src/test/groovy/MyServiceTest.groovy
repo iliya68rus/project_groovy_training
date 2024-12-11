@@ -1,18 +1,15 @@
 import org.junit.jupiter.api.Test
 
 class MyServiceTest {
-//    MyService myService
-
     @Test
     void testDoSomething() {
-        MyService myService = new MyService()
         FluentTestSpec
                 .given {
-                    target myService
+                    target MyService.class
                 }
                 .when {
                     callMethod {
-                        myService.doSomething(50)
+                        it.doSomething(50)
                     }
                 }
                 .then {
@@ -22,19 +19,34 @@ class MyServiceTest {
     }
 
     @Test
-    void testIsEven() {
-        MyService myService = new MyService()
+    void testIsEvenFalse() {
         FluentTestSpec
                 .given {
-                    target myService
+                    target MyService.class
                 }
                 .when {
                     callMethod {
-                        myService.isEven(5)
+                        it.isEven(5)
                     }
                 }
                 .then {
                     assertFalse()
+                }
+    }
+
+    @Test
+    void testIsEvenTrue() {
+        FluentTestSpec
+                .given {
+                    target MyService.class
+                }
+                .when {
+                    callMethod {
+                        it.isEven(6)
+                    }
+                }
+                .then {
+                    assertTrue()
                 }
     }
 }

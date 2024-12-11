@@ -2,8 +2,8 @@ class TestSpec {
     def target
     def result
 
-    def target(def obj) {
-        target = obj
+    def target(Class clazz) {
+        target = clazz.getDeclaredConstructors()[0].newInstance()
     }
 
     def when(@DelegatesTo(WhenSpec) Closure closure) {

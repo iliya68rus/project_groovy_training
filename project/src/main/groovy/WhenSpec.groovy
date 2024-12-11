@@ -6,8 +6,6 @@ class WhenSpec {
     }
 
     def callMethod(Closure closure) {
-        closure.delegate = target
-        def res = closure()
-        res
+        closure(target)
     }
 }
