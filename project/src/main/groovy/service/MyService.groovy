@@ -9,11 +9,11 @@ class MyService {
 
     def doSomething(int value) {
         audit.log("doSomething $value")
-        return value * 2
+        value * 2
     }
 
     def isEven(int value) {
         audit.log("isEven $value")
-        return value % 2 == 0
+        value % 2 == 0
     }
 }

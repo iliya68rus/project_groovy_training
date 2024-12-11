@@ -7,14 +7,33 @@ import java.lang.reflect.Constructor
 class TestSpec {
     def target
     def result
+    def mocks = []
 
     def target(Class clazz) {
         Constructor<?> constructor = clazz.getDeclaredConstructors()[0]
         def objects = []
+        boolean notFound = true
         for (final Class type in constructor.getParameterTypes()) {
-            objects += Mockito.mock(type)
+            def iterator = mocks.iterator()
+            while (iterator.hasNext()) {
+                def mock = iterator.next()
+                if (mock.getClass() == type) {
+                    objects += mock
+                    iterator.remove()
+                    notFound = false
+                    break
+                }
+            }
+
+            if (notFound) {
+                objects += Mockito.mock(type)
+            }
         }
         target = constructor.newInstance(objects.toArray())
+    }
+
+    def mocks(Object... mocks) {
+        this.mocks = new ArrayList(mocks.toList())
     }
 
     def when(@DelegatesTo(WhenSpec) Closure closure) {

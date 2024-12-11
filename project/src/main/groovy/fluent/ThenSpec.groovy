@@ -13,18 +13,20 @@ class ThenSpec {
         Assertions.assertNotNull(result, "Ожидаемое значение не должно быть равно null")
     }
 
-    def assertEq(expected) {
+    def assertEq(String expected) {
+        Assertions.assertEquals(expected, (String) result, "Ожидаемый результат $expected но получен $result")
+    }
+
+    def assertEq(def expected) {
         //noinspection GroovyAssignabilityCheck
         Assertions.assertEquals(expected, result, "Ожидаемый результат $expected но получен $result")
     }
 
     def assertFalse() {
-        //noinspection GroovyAssignabilityCheck
-        Assertions.assertFalse(result, "Ожидаемый результат false но получен $result")
+        Assertions.assertFalse((boolean) result, "Ожидаемый результат false но получен $result")
     }
 
     def assertTrue() {
-        //noinspection GroovyAssignabilityCheck
-        Assertions.assertTrue(result, "Ожидаемый результат true но получен $result")
+        Assertions.assertTrue((boolean) result, "Ожидаемый результат true но получен $result")
     }
 }
