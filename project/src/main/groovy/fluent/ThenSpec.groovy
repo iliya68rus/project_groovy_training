@@ -22,6 +22,10 @@ class ThenSpec {
         Assertions.assertEquals(expected, result, "Ожидаемый результат $expected но получен $result")
     }
 
+    def assertEq(def expected, Closure closure) {
+        Assertions.assertEquals(expected, closure(result), "Ожидаемый результат $expected но получен $result")
+    }
+
     def assertFalse() {
         Assertions.assertFalse((boolean) result, "Ожидаемый результат false но получен $result")
     }

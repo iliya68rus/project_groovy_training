@@ -1,9 +1,9 @@
 package service
 
-class MyService {
+class MyService1 {
     private final Audit audit
 
-    MyService(Audit audit) {
+    MyService1(Audit audit) {
         this.audit = audit
     }
 

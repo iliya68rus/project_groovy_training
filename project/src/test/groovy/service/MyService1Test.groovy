@@ -3,12 +3,12 @@ package service
 import fluent.FluentTestSpec
 import org.junit.jupiter.api.Test
 
-class MyServiceTest {
+class MyService1Test {
     @Test
     void testDoSomething() {
         FluentTestSpec
                 .given {
-                    target MyService
+                    target MyService1
                 }
                 .when {
                     callMethod {
@@ -25,7 +25,7 @@ class MyServiceTest {
     void testIsEvenFalse() {
         FluentTestSpec
                 .given {
-                    target MyService
+                    target MyService1
                 }
                 .when {
                     callMethod {
@@ -41,7 +41,7 @@ class MyServiceTest {
     void testIsEvenTrue() {
         FluentTestSpec
                 .given {
-                    target MyService
+                    target MyService1
                 }
                 .when {
                     callMethod {
