@@ -1,3 +1,6 @@
+package service
+
+import fluent.FluentTestSpec
 import org.junit.jupiter.api.Test
 
 class MyServiceTest {

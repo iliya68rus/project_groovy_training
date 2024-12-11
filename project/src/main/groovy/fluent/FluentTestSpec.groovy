@@ -1,3 +1,5 @@
+package fluent
+
 class FluentTestSpec {
     static TestSpec given(@DelegatesTo(TestSpec) Closure closure) {
         def specification = new TestSpec()

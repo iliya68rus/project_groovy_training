@@ -1,9 +1,20 @@
+package fluent
+
+import org.mockito.Mockito
+
+import java.lang.reflect.Constructor
+
 class TestSpec {
     def target
     def result
 
     def target(Class clazz) {
-        target = clazz.getDeclaredConstructors()[0].newInstance()
+        Constructor<?> constructor = clazz.getDeclaredConstructors()[0]
+        def objects = []
+        for (final Class type in constructor.getParameterTypes()) {
+            objects += Mockito.mock(type)
+        }
+        target = constructor.newInstance(objects.toArray())
     }
 
     def when(@DelegatesTo(WhenSpec) Closure closure) {

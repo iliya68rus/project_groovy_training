@@ -1,3 +1,5 @@
+package fluent
+
 class WhenSpec {
     def target
 
