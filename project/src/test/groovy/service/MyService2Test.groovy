@@ -9,7 +9,7 @@ class MyService2Test {
         FluentTestSpec
                 .given {
                     mocks "mock1", "mock2"
-                    target MyService2.class
+                    target MyService2
                 }
                 .when {
                     callMethod {

@@ -8,7 +8,7 @@ class MyServiceTest {
     void testDoSomething() {
         FluentTestSpec
                 .given {
-                    target MyService.class
+                    target MyService
                 }
                 .when {
                     callMethod {
@@ -25,7 +25,7 @@ class MyServiceTest {
     void testIsEvenFalse() {
         FluentTestSpec
                 .given {
-                    target MyService.class
+                    target MyService
                 }
                 .when {
                     callMethod {
@@ -41,7 +41,7 @@ class MyServiceTest {
     void testIsEvenTrue() {
         FluentTestSpec
                 .given {
-                    target MyService.class
+                    target MyService
                 }
                 .when {
                     callMethod {
