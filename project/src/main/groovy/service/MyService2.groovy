@@ -15,4 +15,8 @@ class MyService2 {
         audit.log("getFullName $value")
         "$name1 $name2 $value"
     }
+
+    def getTypeAudit() {
+        audit.getType()
+    }
 }
