@@ -23,7 +23,10 @@ class ThenSpec {
     }
 
     def assertEq(def expected, Closure closure) {
-        Assertions.assertEquals(expected, closure(result), "Ожидаемый результат $expected но получен $result")
+        if (expected instanceof GString) {
+            expected = expected.toString()
+        }
+        Assertions.assertEquals(expected, closure(result), "Ожидаемый результат $expected но получен ${closure(result)}")
     }
 
     def assertFalse() {

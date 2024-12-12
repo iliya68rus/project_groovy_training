@@ -37,8 +37,8 @@ class MyService3Test {
                     }
                 }
                 .then {
-                    assertEq("person") {
-                        it.fullName()
+                    assertEq("${person.getFirstName()} ${person.getLastName()}") {
+                        it.getFullName()
                     }
                 }
     }

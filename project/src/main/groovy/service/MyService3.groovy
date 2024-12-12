@@ -16,6 +16,6 @@ class MyService3 {
     }
 
     def convertPerson(PersonModel person) {
-        new PersonResponse(fullname: "${person.firstName()} ${person.lastName()}")
+        new PersonResponse("${person.getFirstName()} ${person.getLastName()}")
     }
 }
