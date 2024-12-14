@@ -1,6 +1,7 @@
 package fluent
 
 import org.junit.jupiter.api.Assertions
+import org.mockito.Mockito
 
 class ThenSpec {
     def result
@@ -35,5 +36,9 @@ class ThenSpec {
 
     def assertTrue() {
         Assertions.assertTrue((boolean) result, "Ожидаемый результат true но получен $result")
+    }
+
+    def assertTimes(def mock, int wantedNumberOfInvocations, Closure closure) {
+        closure(Mockito.verify(mock, Mockito.times(wantedNumberOfInvocations)))
     }
 }

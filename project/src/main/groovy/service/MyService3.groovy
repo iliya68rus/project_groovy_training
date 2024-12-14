@@ -12,6 +12,8 @@ class MyService3 {
     }
 
     def getData() {
+        audit.log("лог 1")
+        audit.log("лог 2")
         new DataModel("fieldValue1", "fieldValue2")
     }
 
